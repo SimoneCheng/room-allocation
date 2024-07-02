@@ -40,7 +40,7 @@ export const getDefaultRoomAllocation = ({ guest, rooms }: Params) => {
 
         if (newPrice < dp[i][j]) {
           dp[i][j] = newPrice;
-          allocation[i][j] = [...allocation[i - a - c][j - 1], { adult: a, child: c, price }];
+          allocation[i][j] = [...allocation[i - a - c][j - 1], { adult: a, child: c, price, capacity: room.capacity }];
         }
       }
     }

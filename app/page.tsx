@@ -1,4 +1,5 @@
-import { Demo1, Demo2, Demo3 } from "@/features/number-input-demo";
+import { Demo1, Demo2, Demo3 } from '@/features/number-input-demo';
+import { RoomAllocation } from '@/features/room-allocation';
 
 export default function Home() {
   return (
@@ -19,6 +20,18 @@ export default function Home() {
           disabled
         </h3>
         <Demo3 />
+      </section>
+      <h2 className="text-center text-4xl">
+        Room Allocation
+      </h2>
+      <section className="flex flex-col items-center m-8">
+        <RoomAllocation
+          guest={{ adult: 4, child: 2 }}
+          rooms={[
+            { roomPrice: 1000, adultPrice: 200, childPrice: 100, capacity: 4 },
+            { roomPrice: 0, adultPrice: 500, childPrice: 500, capacity: 4 },
+          ]}
+        />
       </section>
     </main>
   );
