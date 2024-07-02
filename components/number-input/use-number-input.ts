@@ -86,7 +86,6 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   useEffect(() => {
     if (!isLongPress) return;
     intervalRef.current = setInterval(() => {
-      console.log('hihihi');
       intervalTime.current += 1;
       if (action === 'increment') {
         const next = value + stepProp * intervalTime.current;
@@ -98,7 +97,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         if (prev < min) return;
         onChangeProp?.(null, prev);
       }
-    }, 200);
+    }, 100);
 
     return () => {
       intervalTime.current = 0;
