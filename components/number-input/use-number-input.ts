@@ -109,7 +109,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       intervalTime.current = 0;
       clearInterval(intervalRef.current);
     }
-  }, [action, isLongPress, max, min, onChangeProp, stepProp, value]);
+  }, [action, decimalPlaces, isLongPress, max, min, onChangeProp, stepProp, value]);
 
   const getIncrementButtonProps = () => {
     return {
