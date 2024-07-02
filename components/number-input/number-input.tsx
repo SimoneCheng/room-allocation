@@ -17,7 +17,7 @@ const NumberInput = (props: UseNumberInputProps) => {
       <Button
         className={clsx(
           'text-2xl',
-          props.value === props.min && 'border-gray-300 text-gray-300 cursor-not-allowed'
+          (props.value === props.min || props.disabled) && 'border-gray-300 text-gray-300 cursor-not-allowed'
         )}
         {...getDecrementButtonProps()}
       >
@@ -30,7 +30,7 @@ const NumberInput = (props: UseNumberInputProps) => {
       <Button
         className={clsx(
           'text-2xl',
-          props.value === props.max && 'border-gray-300 text-gray-300 cursor-not-allowed'
+          (props.value === props.max || props.disabled) && 'border-gray-300 text-gray-300 cursor-not-allowed'
         )}
         {...getIncrementButtonProps()}
       >

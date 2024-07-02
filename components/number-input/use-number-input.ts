@@ -14,6 +14,11 @@ import {
   type UseInputProps
 } from '../input';
 
+const getDecimalPlaces = (num: number) => {
+  if (Math.floor(num) === num) return 0;
+  return num.toString().split('.')[1].length || 0;
+};
+
 export interface UseNumberInputProps extends Omit<UseInputProps, 'onChange' | 'onBlur'> {
   step?: number;
   min?: number;
@@ -44,6 +49,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   } = props;
   const valueAsString = value?.toString() ?? '';
   const inputProps = useInputProps(rest);
+  const decimalPlaces = getDecimalPlaces(stepProp);
 
   const getInputProps = () => {
     return {
@@ -88,12 +94,12 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
     intervalRef.current = setInterval(() => {
       intervalTime.current += 1;
       if (action === 'increment') {
-        const next = value + stepProp * intervalTime.current;
+        const next = Number((value + stepProp * intervalTime.current).toFixed(decimalPlaces));
         if (next > max) return;
         onChangeProp?.(null, next);
       }
       if (action === 'decrement') {
-        const prev = value - stepProp * intervalTime.current;
+        const prev = Number((value - stepProp * intervalTime.current).toFixed(decimalPlaces));
         if (prev < min) return;
         onChangeProp?.(null, prev);
       }
@@ -108,7 +114,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const getIncrementButtonProps = () => {
     return {
       onMouseDown: (e: MouseEvent<HTMLButtonElement>) => {
-        const next = value + stepProp;
+        if (inputProps.disabled) return;
+        const next = Number((value + stepProp).toFixed(decimalPlaces));
         if (next > max) return;
         onChangeProp?.(e, next);
         timeoutRef.current = setTimeout(() => {
@@ -117,6 +124,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         }, 500);
       },
       onMouseUp: () => {
+        if (inputProps.disabled) return;
         clearTimeout(timeoutRef.current);
         setIsLongPress(false);
       }
@@ -126,7 +134,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const getDecrementButtonProps = () => {
     return {
       onMouseDown: (e: MouseEvent<HTMLButtonElement>) => {
-        const prev = value - stepProp;
+        if (inputProps.disabled) return;
+        const prev = Number((value - stepProp).toFixed(decimalPlaces));
         if (prev < min) return;
         onChangeProp?.(e, prev);
         timeoutRef.current = setTimeout(() => {
@@ -135,6 +144,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         }, 500);
       },
       onMouseUp: () => {
+        if (inputProps.disabled) return;
         clearTimeout(timeoutRef.current);
         setIsLongPress(false);
       }
