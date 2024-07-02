@@ -1,29 +1,25 @@
-'use client';
-
-import { useState } from "react";
-import { NumberInput } from "@/components/number-input";
+import { Demo1, Demo2, Demo3 } from "@/features/number-input-demo";
 
 export default function Home() {
-  const [value, setValue] = useState<number | undefined>(2);
   return (
-    <main>
-      <NumberInput
-        name="test"
-        value={value}
-        min={1}
-        max={10}
-        step={1}
-        onChange={(e, value) => setValue(value)}
-        onBlur={(e, value) => {
-          if (!value) {
-            setValue(0);
-          } else if (value > 10) {
-            setValue(10);
-          } else if (value < 1) {
-            setValue(1);
-          }
-        }}
-      />
+    <main className="m-5">
+      <h2 className="text-center text-4xl">
+        Custom Number Input Demo
+      </h2>
+      <section className="flex flex-col items-center m-8">
+        <h3 className="text-2xl m-5">
+          step is int
+        </h3>
+        <Demo1 />
+        <h3 className="text-2xl m-5">
+          step is float
+        </h3>
+        <Demo2 />
+        <h3 className="text-2xl m-5">
+          disabled
+        </h3>
+        <Demo3 />
+      </section>
     </main>
   );
 }
