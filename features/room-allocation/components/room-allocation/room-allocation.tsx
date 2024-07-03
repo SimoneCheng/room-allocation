@@ -31,7 +31,7 @@ const RoomAllocation = (props: RoomAllocationProps) => {
   return (
     <div>
       <h2 className="text-center bg-green-100 rounded p-3 m-3">
-        {`住客人數：${guest.adult}位大人，${guest.child}位小孩／${rooms.length}房`}
+        {`住客人數：${guest.adult} 位大人，${guest.child} 位小孩／${rooms.length} 房`}
       </h2>
       <div className="text-center bg-blue-100 rounded p-3 m-3">
         {`尚未分配人數：${remainAdult} 位大人，${remainChild} 位小孩`}
@@ -47,7 +47,7 @@ const RoomAllocation = (props: RoomAllocationProps) => {
                   <div>大人</div>
                   <NumberInput
                     max={remainCapacity === 0 ? room.adult : room.adult + remainAdult}
-                    min={0}
+                    min={1}
                     value={room.adult}
                     onChange={(_, value) => {
                       const newResult = [...result];

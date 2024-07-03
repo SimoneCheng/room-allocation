@@ -4,7 +4,7 @@ import { RoomAllocation } from '@/features/room-allocation';
 export default function Home() {
   return (
     <main className="m-5">
-      <h2 className="text-center text-4xl">
+      <h2 className="text-center text-4xl m-8">
         Custom Number Input Demo
       </h2>
       <section className="flex flex-col items-center m-8">
@@ -21,7 +21,8 @@ export default function Home() {
         </h3>
         <Demo3 />
       </section>
-      <h2 className="text-center text-4xl">
+      <hr />
+      <h2 className="text-center text-4xl m-8">
         Room Allocation
       </h2>
       <section className="flex justify-center m-8">
