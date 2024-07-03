@@ -24,12 +24,30 @@ export default function Home() {
       <h2 className="text-center text-4xl">
         Room Allocation
       </h2>
-      <section className="flex flex-col items-center m-8">
+      <section className="flex justify-center m-8">
         <RoomAllocation
           guest={{ adult: 4, child: 2 }}
           rooms={[
             { roomPrice: 1000, adultPrice: 200, childPrice: 100, capacity: 4 },
             { roomPrice: 0, adultPrice: 500, childPrice: 500, capacity: 4 },
+          ]}
+        />
+        <RoomAllocation
+          guest={{ adult: 7, child: 3 }}
+          rooms={[
+            { roomPrice: 2000, adultPrice: 200, childPrice: 100, capacity: 4 },
+            { roomPrice: 2000, adultPrice: 200, childPrice: 100, capacity: 4 },
+            { roomPrice: 2000, adultPrice: 400, childPrice: 200, capacity: 2 },
+            { roomPrice: 2000, adultPrice: 400, childPrice: 200, capacity: 2 },
+          ]}
+        />
+        <RoomAllocation
+          guest={{ adult: 16, child: 0 }}
+          rooms={[
+            { roomPrice: 500, adultPrice: 500, childPrice: 300, capacity: 4 },
+            { roomPrice: 500, adultPrice: 500, childPrice: 300, capacity: 4 },
+            { roomPrice: 0, adultPrice: 500, childPrice: 300, capacity: 8 },
+            { roomPrice: 500, adultPrice: 1000, childPrice: 600, capacity: 2 },
           ]}
         />
       </section>
