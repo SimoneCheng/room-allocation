@@ -51,7 +51,7 @@ const RoomAllocation = (props: RoomAllocationProps) => {
                     value={room.adult}
                     onChange={(_, value) => {
                       const newResult = [...result];
-                      newResult[index].adult = value;
+                      newResult[index].adult = value ?? 0;
                       setResult(newResult);
                     }}
                   />
@@ -64,7 +64,7 @@ const RoomAllocation = (props: RoomAllocationProps) => {
                     value={room.child}
                     onChange={(_, value) => {
                       const newResult = [...result];
-                      newResult[index].child = value;
+                      newResult[index].child = value ?? 0;
                       setResult(newResult);
                     }}
                   />
