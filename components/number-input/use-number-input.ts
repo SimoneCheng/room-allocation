@@ -5,6 +5,7 @@ import {
   type FocusEvent,
   type MouseEvent,
   type KeyboardEvent,
+  type TouchEvent,
   useRef,
   useState,
   useEffect,
@@ -25,7 +26,7 @@ export interface UseNumberInputProps extends Omit<UseInputProps, 'onChange' | 'o
   max?: number;
   value?: number;
   onChange?: (
-    event: null | ChangeEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement> | FocusEvent<HTMLInputElement> | KeyboardEvent<HTMLInputElement>,
+    event: null | ChangeEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement> | FocusEvent<HTMLInputElement> | KeyboardEvent<HTMLInputElement> | TouchEvent<HTMLButtonElement>,
     value: number | undefined
   ) => void;
   onBlur?: (
@@ -124,7 +125,22 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         }, 500);
       },
       onMouseUp: () => {
+        clearTimeout(timeoutRef.current);
+        setIsLongPress(false);
+      },
+      onTouchStart: (e: TouchEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         if (inputProps.disabled) return;
+        const next = Number((value + stepProp).toFixed(decimalPlaces));
+        if (next > max) return;
+        onChangeProp?.(e, next);
+        timeoutRef.current = setTimeout(() => {
+          setAction('increment');
+          setIsLongPress(true);
+        }, 500);
+      },
+      onTouchEnd: (e: TouchEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         clearTimeout(timeoutRef.current);
         setIsLongPress(false);
       }
@@ -144,7 +160,22 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         }, 500);
       },
       onMouseUp: () => {
+        clearTimeout(timeoutRef.current);
+        setIsLongPress(false);
+      },
+      onTouchStart: (e: TouchEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         if (inputProps.disabled) return;
+        const prev = Number((value - stepProp).toFixed(decimalPlaces));
+        if (prev < min) return;
+        onChangeProp?.(e, prev);
+        timeoutRef.current = setTimeout(() => {
+          setAction('decrement');
+          setIsLongPress(true);
+        }, 500);
+      },
+      onTouchEnd: (e: TouchEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         clearTimeout(timeoutRef.current);
         setIsLongPress(false);
       }
