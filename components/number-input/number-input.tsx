@@ -16,7 +16,7 @@ const NumberInput = (props: UseNumberInputProps) => {
     <div className='flex'>
       <Button
         className={clsx(
-          'text-2xl',
+          'text-2xl select-none',
           (props.value === props.min || props.disabled) && 'border-gray-300 text-gray-300 cursor-not-allowed'
         )}
         {...getDecrementButtonProps()}
@@ -29,7 +29,7 @@ const NumberInput = (props: UseNumberInputProps) => {
       />
       <Button
         className={clsx(
-          'text-2xl',
+          'text-2xl select-none',
           (props.value === props.max || props.disabled) && 'border-gray-300 text-gray-300 cursor-not-allowed'
         )}
         {...getIncrementButtonProps()}
